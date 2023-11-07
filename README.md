@@ -105,7 +105,10 @@ SONAR_TOKEN
 - /infrastructure - CDK TypeScript files for infrastructure deployment on AWS. <br />
 
 ## Deployment Instructions
-Infrastructure deployment will be completed via CDK locally.
+### S3 Bucket Website
+Infrastructure deployment will be completed via CDK locally. However before proceed with the deployed a AWS Route53 Hosted Zone, has be created in advance and setup within the `cdk.json` file and the `domainName` parameter , otherwise you'll get below error:
+
+![Hosted Zone Error](images/route53-zones-error.png)
 
 1. Clone [GitHub](https://github.com/pablomagro/react-nodejs-typescript-mongodb-cicd) project to your local. <br /> <br />
 

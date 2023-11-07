@@ -11,7 +11,7 @@ function App() {
           className="App-link"
           rel="noopener noreferrer"
         >
-          React App Example 🚀
+          🚀 React App Example 🚀
         </h2>
         <h3>Deployed with AWS CDK 2.0 TypeScript</h3>
       </header>
