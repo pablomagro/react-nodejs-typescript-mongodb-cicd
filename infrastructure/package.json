@@ -1,0 +1,38 @@
+{
+  "name": "cdk",
+  "version": "0.1.0",
+  "bin": {
+    "cdk": "bin/cdk.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest --runInBand --passWithNoTests",
+    "cdk": "cdk",
+    "build:frontend": "cd ../frontend && npm run build",
+    "deploy:e2e": "npm run build:frontend && cd ../infrastructure && cdk deploy S3WebSiteStack --context config=e2e --require-approval never --progress=events",
+    "deploy:testing": "npm run build:frontend && cd ../infrastructure && cdk deploy S3WebSiteStack --context config=testing --require-approval never --progress=events",
+    "deploy:production": "npm run build:frontend && cd ../infrastructure && cdk deploy S3WebSiteStack --context config=production --require-approval never --progress=events",
+    "destroy:e2e": "cdk destroy S3WebSiteStack --context config=e2e --require-approval never --progress=events",
+    "destroy:testing": "cdk destroy S3WebSiteStack --context config=testing --require-approval never --progress=events",
+    "destroy:production": "cdk destroy S3WebSiteStack --context config=production --require-approval never"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^2.68.0",
+    "@types/jest": "^29.5.5",
+    "@types/node": "20.7.1",
+    "aws-cdk": "2.103.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "~5.2.2"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.103.1",
+    "constructs": "^10.0.0",
+    "source-map-support": "^0.5.21"
+  }
+}
