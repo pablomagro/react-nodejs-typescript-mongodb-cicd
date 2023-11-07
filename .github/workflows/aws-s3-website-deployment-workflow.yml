@@ -3,14 +3,16 @@ name: 'Deploy React app to AWS - Workflow - S3 Website'
 on:
   pull_request:
     paths:
-      - infrastructure/**
-      - frontend/**
+      - 'infrastructure/**'
+      - '!infrastructure/lib/infrastructure-fargate-website-stack.ts'
+      - 'frontend/**'
   push:
     branches:
       - master
     paths:
-      - infrastructure/**
-      - frontend/**
+      - 'infrastructure/**'
+      - '!infrastructure/lib/infrastructure-fargate-website-stack.ts'
+      - 'frontend/**'
 
 env:
   AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}

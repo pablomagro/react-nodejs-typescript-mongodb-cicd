@@ -170,6 +170,7 @@ Will failed the build when discovered critical vulnerability issues.
 ![architecture_diagram](images/Trivy-GitHub-Code-Scan.png)
 
 ## Deployed Applications
+![Deployed Application](images/deployed-application.png)
 
 ## Other Useful Documentation
 
