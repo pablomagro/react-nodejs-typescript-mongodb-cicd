@@ -70,20 +70,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
       # Download published artifact
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: build-artifact
           path: './frontend/build'
-
-      - name: Install infrastructure project dependencies
-        run: npm ci
 
       - name: Deploy to ${{ env.STACK_ENVIRONMENT }} AWS
         uses: youyo/aws-cdk-github-actions@v2
@@ -105,18 +97,10 @@ jobs:
     # Manual approval only for PRODUCTION!
     environment: 'production'
     if: github.ref == 'refs/heads/master'
-    defaults:
-      run:
-        working-directory: infrastructure
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      # - name: Set up Node
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 20
 
       # Download published artifact
       - name: Download artifact
@@ -124,11 +108,6 @@ jobs:
         with:
           name: build-artifact
           path: './frontend/build'
-
-      # - name: Install CDK dependencies
-      #   run: |
-      #     cd infrastructure
-      #     npm ci
 
       - name: cdk diff
         uses: youyo/aws-cdk-github-actions@v2

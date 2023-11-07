@@ -93,20 +93,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
       # Download published artifact
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: build-artifact
           path: './frontend/build'
-
-      - name: Install infrastructure project dependencies
-        run: npm ci
 
       - name: Deploy to ${{ env.STACK_ENVIRONMENT }} AWS
         uses: youyo/aws-cdk-github-actions@v2
@@ -156,12 +148,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+        uses: actions/checkout@v30
 
       # Download published artifact
       - name: Download artifact
@@ -170,15 +157,11 @@ jobs:
           name: build-artifact
           path: './frontend/build'
 
-      - name: Install CDK dependencies
-        run: |
-          cd infrastructure
-          npm ci
-
       - name: cdk diff
         uses: youyo/aws-cdk-github-actions@v2
         with:
           cdk_subcommand: 'diff'
+          working_dir: ./infrastructure
           cdk_stack: 'S3WebSiteStack'
           cdk_args: '--context config=${{ env.STACK_ENVIRONMENT }}'
           actions_comment: true
@@ -192,6 +175,7 @@ jobs:
         uses: youyo/aws-cdk-github-actions@v2
         with:
           cdk_subcommand: 'deploy'
+          working_dir: ./infrastructure
           cdk_stack: 'S3WebSiteStack'
           cdk_args: '--context config=${{ env.STACK_ENVIRONMENT }} --require-approval never --progress=events --no-cli-pager'
           actions_comment: false
