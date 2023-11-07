@@ -105,15 +105,18 @@ jobs:
     # Manual approval only for PRODUCTION!
     environment: 'production'
     if: github.ref == 'refs/heads/master'
+    defaults:
+      run:
+        working-directory: infrastructure
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+      # - name: Set up Node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 20
 
       # Download published artifact
       - name: Download artifact
@@ -122,15 +125,15 @@ jobs:
           name: build-artifact
           path: './frontend/build'
 
-      - name: Install CDK dependencies
-        run: |
-          cd infrastructure
-          npm ci
+      # - name: Install CDK dependencies
+      #   run: |
+      #     cd infrastructure
+      #     npm ci
 
       - name: cdk diff
         uses: youyo/aws-cdk-github-actions@v2
         with:
-          working_dir: ./infrastructure
+          # working_dir: ./infrastructure
           cdk_subcommand: 'diff'
           cdk_stack: 'S3WebSiteStack'
           cdk_args: '--context config=${{ env.STACK_ENVIRONMENT }}'
@@ -144,7 +147,7 @@ jobs:
       - name: cdk deploy
         uses: youyo/aws-cdk-github-actions@v2
         with:
-          working_dir: ./infrastructure
+          # working_dir: ./infrastructure
           cdk_subcommand: 'deploy'
           cdk_stack: 'S3WebSiteStack'
           cdk_args: '--context config=${{ env.STACK_ENVIRONMENT }} --require-approval never --progress=events --no-cli-pager'

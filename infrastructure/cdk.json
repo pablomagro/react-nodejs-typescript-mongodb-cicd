@@ -82,7 +82,7 @@
       "account": "",
       "region": "",
       "frontendSources": "build",
-      "domainName": "production.site",
+      "domainName": "pablo-magro-gaspar.site",
       "snsRecipient": "recipient-prod@gmail.com"
     }
   }
