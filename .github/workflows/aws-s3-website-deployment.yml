@@ -130,6 +130,7 @@ jobs:
       - name: cdk diff
         uses: youyo/aws-cdk-github-actions@v2
         with:
+          working_dir: ./infrastructure
           cdk_subcommand: 'diff'
           cdk_stack: 'S3WebSiteStack'
           cdk_args: '--context config=${{ env.STACK_ENVIRONMENT }}'
@@ -143,6 +144,7 @@ jobs:
       - name: cdk deploy
         uses: youyo/aws-cdk-github-actions@v2
         with:
+          working_dir: ./infrastructure
           cdk_subcommand: 'deploy'
           cdk_stack: 'S3WebSiteStack'
           cdk_args: '--context config=${{ env.STACK_ENVIRONMENT }} --require-approval never --progress=events --no-cli-pager'
