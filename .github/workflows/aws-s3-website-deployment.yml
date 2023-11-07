@@ -1,4 +1,4 @@
-name: 'Deploy React application to AWS - S3 Website'
+name: 'Deploy React app to AWS - S3 Website'
 
 on:
   workflow_dispatch:
